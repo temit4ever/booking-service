@@ -1,0 +1,744 @@
+{
+    "info": {
+        "_postman_id": "71fb2658-9a47-4887-b414-af832d17fa5c",
+        "name": "booking-service",
+        "description": "**This is the service for booking.**\n\nThe full documentation to the service can be found in the link below\n\n[https://doc.mozrest.com/api/rp/index.html#introduction](https://doc.mozrest.com/api/rp/index.html#introduction)",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+        "_exporter_id": "26807785"
+    },
+    "item": [
+        {
+            "name": "App",
+            "item": [
+                {
+                    "name": "booking availability",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{appServiceBaseUrl}}/bookings/availability?{{venueId}}",
+                            "host": [
+                                "{{appServiceBaseUrl}}"
+                            ],
+                            "path": [
+                                "bookings",
+                                "availability"
+                            ],
+                            "query": [
+                                {
+                                    "key": "{{venueId}}",
+                                    "value": null
+                                }
+                            ]
+                        },
+                        "description": "**The endpoint check for booking time slots with the required parameter and body and return true if the time slot choosen is available and between venue opening period otherwise it return false for the website.**\n\n**Accepted query Parameters data type**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **venueId** | Mandatory | Fanzo pub venue internal id. | integer |\n| **date** | Mandatory | Booking date/time | string |\n| **partySize** | Mandatory | No of guest | integer |"
+                    },
+                    "response": [
+                        {
+                            "name": "booking availability",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "https://booking-service.com/bookings/availability?{{venueId}}",
+                                    "protocol": "http",
+                                    "host": [
+                                        "booking",
+                                        "service",
+                                        "com"
+                                    ],
+                                    "path": [
+                                        "bookings",
+                                        "availability"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "{{venueId}}",
+                                            "value": null
+                                        }
+                                    ]
+                                }
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{ \"result\": { \"data\": true } }"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking pending",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{appServiceBaseUrl}}/bookings/pending-booking/{{venueId}}",
+                        "description": "**This endpoint create booking as a pending status in other to hold it up to 7 minutes**\n\n**Accepted query Parametersdata type**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **venueId** | Mandatory | Fanzo pub venue internal id. | Integer |\n| **date** | Mandatory | Booking date/time | String |\n| **partySize** | Mandatory | No of guest | integer |"
+                    },
+                    "response": [
+                        {
+                            "name": "pending-booking",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "https://service.staging.fanzo.com/bookings/pending-booking/{{venueId}}"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"data\": {\n            \"bookingId\": \"64506ea860bc5fc4bd524b2d\",\n            \"holdingTime\": 420\n        }\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "commit booking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n     \"specialRequest\": \"Egg and nut alergies\",\n     \"contact\": {\n        \"firstname\": \"Jane\",\n        \"lastname\": \"Doe\",\n        \"email\": \"jane.doe@test.com\",\n        \"telephone\": 44655040452\n       \n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{appServiceBaseUrl}}/bookings/commit/pending-booking/{{bookingId}}?{{fixtureId}}",
+                            "host": [
+                                "{{appServiceBaseUrl}}"
+                            ],
+                            "path": [
+                                "bookings",
+                                "commit",
+                                "pending-booking",
+                                "{{bookingId}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "{{fixtureId}}",
+                                    "value": null
+                                }
+                            ]
+                        },
+                        "description": "**This endpoint get the booking Id and fixtureId when available to complete booking**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **bookingId** | Mandatory | Booking Id from mozrest | String |\n| **fixtureId** | Optional | Fixture id booking is for | Integer |\n| **specialRequest** | Optional | Member/user note | String |\n| **contact\\[firstname\\]** | Mandatory | Contact's firstname | String |\n| **contact\\[lastname\\]** | Mandatory | Contact's lastname | String |\n| **contact\\[telephone\\]** | Mandatory | Contact's telephone | String |\n| **contact\\['email\\]** | Mandatory | Contact's email | string |\n\n**Note:**\n\n- The **bookingId** in the route is the bookingId that was obtained earlier from the response from the pending booking endpoint."
+                    },
+                    "response": [
+                        {
+                            "name": "commit booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n     \"specialRequest\": \"Egg and nut alergies\",\n     \"contact\": {\n        \"firstname\": \"Jane\",\n        \"lastname\": \"Doe\",\n        \"email\": \"jane.doe@test.com\",\n        \"telephone\": 44655040452\n       \n    }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "https://booking-service.com/bookings/commit/pending-booking/649c55f941ef0c2bf6a92c4d?fixtureId=478104",
+                                    "protocol": "https",
+                                    "host": [
+                                        "booking",
+                                        "service",
+                                        "com"
+                                    ],
+                                    "path": [
+                                        "bookings",
+                                        "commit",
+                                        "pending-booking",
+                                        "649c55f941ef0c2bf6a92c4d"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "fixtureId",
+                                            "value": "478104"
+                                        }
+                                    ]
+                                }
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": 69,\n        \"bookingId\": \"649d914cb9cacda3cd51da3d\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "cancel booking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": "{{appServiceBaseUrl}}/bookings/{{bookingId}}/cancel",
+                        "description": "**This endpoint cancel completed booking based on the id that is associated with the bookingId.**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **bookingId** | Mandatory | Booking Id from mozrest | string |\n\n**Note:**\n\n- The **bookingId** here is the string that was obtained from mozrest earlier from the commit booking endpoint."
+                    },
+                    "response": [
+                        {
+                            "name": "cancel booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": ""
+                                },
+                                "url": "https://booking-service.com/bookings/{{bookingId}}/cancel"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"message\": \"Booking was successfully canceled\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking details",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "description": "This endpoint return the upcoming booking details"
+                    },
+                    "response": [
+                        {
+                            "name": "upcoming booking",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "https://booking-service.com/bookings/upcoming-booking-details"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n     \"result\": {\n        \"data\": [\n            {\n                \"id\": 32,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-24 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646cc4787a8d8b47f5ea9f2f\",\n                \"created_at\": \"2023-05-23T13:49:29.000000Z\",\n                \"updated_at\": \"2023-05-23T13:49:44.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 11,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-24 18:30:20\",\n                \"fixture_name\": null,\n                \"special_requests\": \"Glutten free meal\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646cbd1d6410d1e1c172973b\",\n                \"created_at\": \"2023-05-23T13:17:59.000000Z\",\n                \"updated_at\": \"2023-05-23T13:18:21.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 9,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"canceled\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-24 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646c74506b1d331f8d4a211e\",\n                \"created_at\": \"2023-05-23T08:07:21.000000Z\",\n                \"updated_at\": \"2023-05-23T08:08:30.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 8,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-24 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646c2390d55c4e175b3d9710\",\n                \"created_at\": \"2023-05-23T02:22:56.000000Z\",\n                \"updated_at\": \"2023-05-23T02:23:13.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 5,\n                \"book_date_time\": \"2023-05-25 18:30:20\",\n                \"fixture_name\": null,\n                \"special_requests\": \"Egg and nut alergies\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646ab41bad89dd2628f1b89c\",\n                \"created_at\": \"2023-05-22T00:14:28.000000Z\",\n                \"updated_at\": \"2023-05-22T00:15:23.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"venue_id\": 158,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 5,\n                \"book_date_time\": \"2023-05-26 18:30:20\",\n                \"fixture_name\": null,\n                \"special_requests\": \"Glutten free meal\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646ab5f36d2587e6d1d5beb2\",\n                \"created_at\": \"2023-05-22T00:21:56.000000Z\",\n                \"updated_at\": \"2023-05-22T00:23:15.000000Z\",\n                \"venue\": {\n                    \"id\": 158,\n                    \"name\": \"The Regent\"\n                }\n            }\n            \n        ]\n    }\n}\n"
+                        },
+                        {
+                            "name": "past booking",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "https://booking-service.com/bookings/past-booking-details?limit=3&offset=0",
+                                    "protocol": "https",
+                                    "host": [
+                                        "booking",
+                                        "service",
+                                        "com"
+                                    ],
+                                    "path": [
+                                        "bookings",
+                                        "past-booking-details"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "limit",
+                                            "value": "3"
+                                        },
+                                        {
+                                            "key": "offset",
+                                            "value": "0"
+                                        }
+                                    ]
+                                }
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"data\": [\n            {\n                \"id\": 7,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-17 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646c224924d1c763b14a8a2a\",\n                \"created_at\": \"2023-05-23T02:17:27.000000Z\",\n                \"updated_at\": \"2023-05-23T02:17:45.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            },\n            {\n                \"id\": 5,\n                \"venue_id\": 158,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 5,\n                \"book_date_time\": \"2023-05-20 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646ac896cdafcd04d45102f4\",\n                \"created_at\": \"2023-05-22T01:42:28.000000Z\",\n                \"updated_at\": \"2023-05-22T01:42:46.000000Z\",\n                \"venue\": {\n                    \"id\": 158,\n                    \"name\": \"The Regent\"\n                }\n            },\n            {\n                \"id\": 6,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 10,\n                \"book_date_time\": \"2023-05-23 18:30:20\",\n                \"fixture_name\": \"Wealdstone vs Solihull Moors\",\n                \"special_requests\": \"Glutten free meal\\nWealdstone vs Solihull Moors\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646c1e42442cf1c710da1091\",\n                \"created_at\": \"2023-05-23T02:00:12.000000Z\",\n                \"updated_at\": \"2023-05-23T02:00:34.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n            }\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking amend",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": "https://booking-service.com/bookings/amend-booking/{{id}}/{{bookingId}}",
+                        "description": "This endpoint amend existing booking which take in the booking Id and the booking internal Id as part of the request and partySize and date in timestamp as the body\n\n**Accepted query Parametersdata type**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| bookingId | Mandatory | Booking Id from mozrest | string |\n| Id | Mandatory | Fanzo pub venue internal id. | integer |\n| partySize | Mandatory | No of guest | integer |\n| date | Mandatory | Booking date/time slot | string |"
+                    },
+                    "response": [
+                        {
+                            "name": "amend booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 3,\n    \"date\": \"1686402891\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "https://booking-service.com/bookings/amend-booking/{{id}}/{{bookingId}}"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": 69,\n        \"bookingId\": \"649d914cb9cacda3cd51da3d\"\n    }\n}"
+                        }
+                    ]
+                }
+            ],
+            "description": "This folder contains request related to the booking service app endpoint"
+        },
+        {
+            "name": "Website",
+            "item": [
+                {
+                    "name": "booking availability",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{appServiceBaseUrl}}/bookings/availability?{{venueId}}",
+                            "host": [
+                                "{{appServiceBaseUrl}}"
+                            ],
+                            "path": [
+                                "bookings",
+                                "availability"
+                            ],
+                            "query": [
+                                {
+                                    "key": "{{venueId}}",
+                                    "value": null
+                                }
+                            ]
+                        },
+                        "description": "**The endpoint check for booking time slots with the required parameter and body and return true if the time slot choosen is available and between venue opening period otherwise it return false for the app.**\n\n**Accepted query Parameters data type**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **venueId** | Mandatory | Fanzo pub venue internal id. | integer |\n| **date** | Mandatory | Booking date/time | string |\n| **partySize** | Mandatory | No of guest | integer |"
+                    },
+                    "response": [
+                        {
+                            "name": "booking availability",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "https://www-booking-service.com/bookings/availability?{{venueId}}",
+                                    "protocol": "https",
+                                    "host": [
+                                        "www-booking-service",
+                                        "com"
+                                    ],
+                                    "path": [
+                                        "bookings",
+                                        "availability"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "{{venueId}}",
+                                            "value": null
+                                        }
+                                    ]
+                                }
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"data\": true\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking pending",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "{{appServiceBaseUrl}}/bookings/pending-booking/{{venueId}}",
+                        "description": "**This endpoint create booking as a pending status in other to hold it up to 7 minutes**\n\n**Accepted query Parametersdata type**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **venueId** | Mandatory | Fanzo pub venue internal id. | Integer |\n| **date** | Mandatory | Booking date/time | String |\n| **partySize** | Mandatory | No of guest | integer |"
+                    },
+                    "response": [
+                        {
+                            "name": "pending-booking",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 5,\n    \"date\": \"1683729020\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "https://www-booking-service.com/bookings/pending-booking/{{venueId}}"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"data\": {\n            \"bookingId\": \"64506ea860bc5fc4bd524b2d\",\n            \"holdingTime\": 420\n        }\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "commit booking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n     \"specialRequest\": \"Egg and nut alergies\",\n     \"contact\": {\n        \"firstname\": \"Jane\",\n        \"lastname\": \"Doe\",\n        \"email\": \"jane.doe@test.com\",\n        \"telephone\": 44655040452\n       \n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{appServiceBaseUrl}}/bookings/commit/pending-booking/{{bookingId}}?{{fixtureId=}}",
+                            "host": [
+                                "{{appServiceBaseUrl}}"
+                            ],
+                            "path": [
+                                "bookings",
+                                "commit",
+                                "pending-booking",
+                                "{{bookingId}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "{{fixtureId",
+                                    "value": "}}"
+                                }
+                            ]
+                        },
+                        "description": "**This endpoint get the booking Id and fixtureId when available to complete booking**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **bookingId** | Mandatory | Booking Id from mozrest | String |\n| **fixtureId** | Optional | Fixture id booking is for | Integer |\n| **specialRequest** | Optional | Member/user note | String |\n| **contact\\[firstname\\]** | Mandatory | Contact's firstname | String |\n| **contact\\[lastname\\]** | Mandatory | Contact's lastname | String |\n| **contact\\[telephone\\]** | Mandatory | Contact's telephone | String |\n| **contact\\['email\\]** | Mandatory | Contact's email | string |\n\n**Note:**\n\n- The **bookingId** in the route is the bookingId that was obtained earlier from the response from the pending booking endpoint."
+                    },
+                    "response": [
+                        {
+                            "name": "commit booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n     \"specialRequest\": \"Egg and nut alergies\",\n     \"contact\": {\n        \"firstname\": \"Jane\",\n        \"lastname\": \"Doe\",\n        \"email\": \"jane.doe@test.com\",\n        \"telephone\": 44655040452\n       \n    }\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": {
+                                    "raw": "https://www-booking-service.com/bookings/commit/pending-booking/{bookingId}?{fixtureId}",
+                                    "protocol": "https",
+                                    "host": [
+                                        "www-booking-service",
+                                        "com"
+                                    ],
+                                    "path": [
+                                        "bookings",
+                                        "commit",
+                                        "pending-booking",
+                                        "{bookingId}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "{fixtureId}",
+                                            "value": null
+                                        }
+                                    ]
+                                }
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": 69,\n        \"bookingId\": \"649d914cb9cacda3cd51da3d\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "cancel booking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": "{{appServiceBaseUrl}}/bookings/{{id}}/{{bookingId}}/cancel",
+                        "description": "**This endpoint cancel completed booking based on the id that is associated with the bookingId.**\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| **id** | Mandatory | Internal booking id | Integer |\n| **bookingId** | Mandatory | Booking Id from mozrest | string |\n\n**Note:**\n\n- The **bookingId** here is the string that was obtained from mozrest earlier from the commit booking endpoint.\n- The **Id** is the internal id associated to the bookingId"
+                    },
+                    "response": [
+                        {
+                            "name": "cancel booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [],
+                                "url": "https://www-booking-service.com/bookings/{{id}}/{{bookingId}}/cancel"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"message\": \"Booking was successfully canceled\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking amend",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": "{{appServiceBaseUrl}}/bookings/amend-booking/{{id}}/{{bookingId}}"
+                    },
+                    "response": [
+                        {
+                            "name": "amend booking",
+                            "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "name": "Content-Type",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"partySize\": 3,\n    \"date\": \"1689880521\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "https://www-booking-service.com/bookings/amend-booking/2/64886dd775c182b58ec62c38"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"data\": {\n        \"id\": 69,\n        \"bookingId\": \"649d914cb9cacda3cd51da3d\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "booking details",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "description": "This endpoint retrieve a single booking details.\n\n| **Parameter** | **Status** | **Description** | **Type** |\n| --- | --- | --- | --- |\n| id | Mandatory | Internal booking id | integer |\n| bookingId | Mandatory | Booking Id from mozrest | string |"
+                    },
+                    "response": [
+                        {
+                            "name": "booking details",
+                            "originalRequest": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "https://www-booking-service.com/bookings/booking-details/{{id}}/{{bookingId}}"
+                            },
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": "",
+                                    "type": "text"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"result\": {\n        \"data\": {\n            \"id\": 1,\n                \"venue_id\": 30,\n                \"venue_booking_platform_id\": \"63321092c7bcd30e12aa104b\",\n                \"member_id\": 509970,\n                \"firstname\": \"Tobi\",\n                \"lastname\": \"Wurner\",\n                \"email\": \"tobi.wurner@gmail.com\",\n                \"status\": \"confirmed\",\n                \"contact_number\": \"44655040452\",\n                \"number_of_guest\": 5,\n                \"book_date_time\": \"2023-05-25 18:30:20\",\n                \"fixture_name\": null,\n                \"special_requests\": \"Egg and nut alergies\\nThis booking was made through FANZO\",\n                \"booking_id\": \"646ab41bad89dd2628f1b89c\",\n                \"created_at\": \"2023-05-22T00:14:28.000000Z\",\n                \"updated_at\": \"2023-05-22T00:15:23.000000Z\",\n                \"venue\": {\n                    \"id\": 30,\n                    \"name\": \"Pub in your Mind\"\n                }\n        }\n    }\n}"
+                        }
+                    ]
+                }
+            ],
+            "description": "This folder contains request related to the booking service app endpoint\n\n###"
+        }
+    ],
+    "variable": [
+        {
+            "key": "appServiceBaseUrl",
+            "value": "https://www-booking-service.com"
+        }
+    ]
+}
